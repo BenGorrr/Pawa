@@ -16,7 +16,8 @@ const Colors = {
 const FontFamily = {
     regular: 'InterTight_400Regular',
     medium: 'InterTight_500Medium',
-    semiBold: 'InterTight_600SemiBold'
+    semiBold: 'InterTight_600SemiBold',
+    bold: 'InterTight_700Bold'
 };
 
 const FontSize = {
@@ -108,4 +109,4 @@ const DefaultStyles = StyleSheet.create({
     }
 });
 
-export { Colors, FontStyles, DefaultStyles };
+export { Colors, FontStyles, FontFamily, DefaultStyles };

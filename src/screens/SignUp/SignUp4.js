@@ -5,56 +5,41 @@ import { Colors, FontStyles } from '../../utils/theme';
 import Button from '../../components/Button';
 import ProgressBar from './components/ProgressBar';
 import GridItem from './components/GridItem';
+import TextItem from './components/TextItem';
+import Modal from '../../components/Modal';
+import { CommonActions } from '@react-navigation/native';
 
-const categories = [
-    {
-        text: "Dogs",
-        image: require("../../assets/icons/category/dogs.png")
-    },
-    {
-        text: "Cats",
-        image: require("../../assets/icons/category/cats.png")
-    },
-    {
-        text: "Birds",
-        image: require("../../assets/icons/category/birds.png")
-    },
-    {
-        text: "Rabbits",
-        image: require("../../assets/icons/category/rabbits.png")
-    },
-    {
-        text: "Primates",
-        image: require("../../assets/icons/category/primates.png")
-    },
-    {
-        text: "Reptiles",
-        image: require("../../assets/icons/category/reptiles.png")
-    },
-    {
-        text: "Fish",
-        image: require("../../assets/icons/category/fish.png")
-    },
-    {
-        text: "Heroes",
-        image: require("../../assets/icons/category/heroes.png")
-    },
-    {
-        text: "Other",
-        image: require("../../assets/icons/category/other.png")
-    }
+const breeds = [
+    "Persian",
+    "Maine Coon",
+    "Siamese",
+    "Ragdoll",
+    "Bengal",
+    "Sphynx",
+    "Scottish Fold",
+    "Abyssinian",
+    "Birman",
+    "Russian Blue",
+    "Siberian",
+    "British Shorthair",
+    "Exotic Shorthair",
+    "Turkish Angora",
+    "Manx",
+    "Himalayan",
+    "Devon Rex"
 ]
 
-export const SignUp3 = ({ navigation, route }) => {
+export const SignUp4 = ({ navigation, route }) => {
 
     const [selectedList, setSelectedList] = useState([]);
+    const [successModal, setSuccessModal] = useState(false);
 
     const isSelected = (item) => {
-        return selectedList.some(obj => obj.text === item.text);
+        return selectedList.includes(item);
     }
 
     const onItemPress = (item) => {
-        const existingIndex = selectedList.findIndex(obj => obj.text === item.text);
+        const existingIndex = selectedList.indexOf(item);
         if (existingIndex !== -1) {
             const updatedList = [...selectedList];
             updatedList.splice(existingIndex, 1);
@@ -64,38 +49,50 @@ export const SignUp3 = ({ navigation, route }) => {
         }
     }
 
+    const onSubmit = () => {
+        setSuccessModal(true);
+    }
+
     const onNext = () => {
-        navigation.navigate("SignUp4");
+        navigation.dispatch(
+            CommonActions.reset({
+                index: 0,
+                routes: [
+                    { name: 'SignIn1' },
+                ],
+            })
+        );
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            <ProgressBar currentStep={2} totalStep={3} />
+            <ProgressBar currentStep={3} totalStep={3} />
 
             <View style={styles.content}>
                 <View style={{ marginVertical: 24 }}>
                     <Text style={[FontStyles.h4, { marginBottom: 8 }]}>
-                        Let's find your match
+                        Breed preferences
                     </Text>
                     <Text style={[FontStyles.small_regular, { color: Colors.text_grey, lineHeight: 20 }]}>
-                        Select the categories of pets you're interested in, and we'll tailor our recommendations to match your preferences.
+                        Choose your preferred breed(s) to refine your pet recommendations.
                     </Text>
                 </View>
                 <View>
                     <FlatList
-                        data={categories}
+                        data={breeds}
                         numColumns={3}
-                        keyExtractor={(item) => item.text}
+                        keyExtractor={(item) => item}
                         renderItem={({ index, item }) => (
-                            <GridItem title={item.text} image={item.image} selected={isSelected(item)} onPress={() => onItemPress(item)} />
+                            <TextItem title={item} selected={isSelected(item)} onPress={() => onItemPress(item)} />
                         )}
                         scrollEnabled={false}
                     />
                 </View>
                 <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                    <Button title={"Continue"} onPress={onNext} />
+                    <Button title={"Continue"} onPress={onSubmit} />
                 </View>
             </View>
+            <Modal visible={successModal} title={"Congratulations!"} body={"Your account has been successfully created. Welcome to our community!"} buttonText={"Continue"} onButtonPress={onNext} />
         </SafeAreaView>
     );
 }

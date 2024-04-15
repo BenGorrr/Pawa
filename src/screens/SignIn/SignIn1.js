@@ -6,53 +6,49 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 
-export const SignUp1 = ({ navigation, route }) => {
+export const SignIn1 = ({ navigation, route }) => {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const onNext = () => {
-        navigation.navigate("SignUp2");
+    const onSubmit = () => {
+        // navigation.navigate("SignUp2");
     }
 
-    const onSignIn = () => {
-        navigation.navigate("SignIn1");
+    const onSignUp = () => {
+        navigation.navigate("SignUp1");
     }
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={{ marginVertical: 24 }}>
                 <Text style={[FontStyles.h4, { marginBottom: 8 }]}>
-                    Create Your Account
+                    Welcome Back!
                 </Text>
                 <Text style={[FontStyles.small_regular, { color: Colors.text_grey }]}>
-                    Welcome! Fill out the form below to create your account and start exploring our platform.
+                    Log in to continue your journey with us. We're excited to have you back!
                 </Text>
             </View>
             <View>
-                <Input placeholder={"Name"} label={"Name"} style={{ marginBottom: 16 }} />
-
                 <Input placeholder={"Email"} label={"Email"} style={{ marginBottom: 16 }} />
                 <Input placeholder={"Password"} label={"Password"} secureTextEntry={!showPassword}
                     rightIcon={require("../../assets/icons/eye.png")}
                     onIconPress={() => { setShowPassword(!showPassword) }}
+                    style={{ marginBottom: 16 }}
                 />
+                <TouchableOpacity>
+                    <Text style={[FontStyles.small_semibold, { color: Colors.primary, alignSelf: "flex-end" }]}>Forgot Password?</Text>
+                </TouchableOpacity>
             </View>
-            <View style={{ marginTop: 16 }}>
-                <Button title={"Sign Up"} onPress={onNext} />
+            <View style={{ marginTop: 24 }}>
+                <Button title={"Sign In"} onPress={onSubmit} />
                 <View style={{ alignItems: "center", marginTop: 8 }}>
-                    <Text style={[FontStyles.small_medium, { color: Colors.text_grey, marginBottom: 4 }]}>
-                        By registering you agree to
-                    </Text>
-                    <Text style={[FontStyles.small_medium, { color: Colors.text_grey }]}>
-                        <Text style={{ color: Colors.primary }}>Terms & Conditions </Text>
-                        and
-                        <Text style={{ color: Colors.primary }}> Privacy Policy</Text>
-                    </Text>
-                    <TouchableOpacity onPress={onSignIn}>
-                        <Text style={[FontStyles.small_medium, { color: Colors.text_grey, marginTop: 24 }]}>
-                            Already have an account?
-                            <Text style={{ color: Colors.primary }}> Sign In</Text>
-                        </Text>
+                </View>
+            </View>
+            <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "center" }}>
+                <View style={{ flexDirection: "row" }}>
+                    <Text style={[FontStyles.small_medium, { color: Colors.text_grey }]}>Don't have an account? </Text>
+                    <TouchableOpacity onPress={onSignUp}>
+                        <Text style={[FontStyles.small_medium, { color: Colors.primary }]}> Sign Up</Text>
                     </TouchableOpacity>
                 </View>
             </View>
