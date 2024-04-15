@@ -18,7 +18,7 @@ const Modal = ({ visible, title, body, buttonText, onButtonPress, style }) => {
                 <View style={styles.View}>
                     <Image source={require("../assets/icons/tick.png")} style={{ marginBottom: 24 }} />
                     <Text style={[FontStyles.large_semibold, { fontFamily: FontFamily.bold, paddingBottom: 8 }]}>{title}</Text>
-                    <Text style={[FontStyles.medium_regular, { color: Colors.text_grey }]}>{body}</Text>
+                    <Text style={[FontStyles.medium_regular, { color: Colors.text_grey, textAlign: "center" }]}>{body}</Text>
                     <Button title={buttonText} onPress={onButtonPress} style={{ marginTop: 24 }} />
                 </View>
             </View>

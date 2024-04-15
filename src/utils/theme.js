@@ -80,7 +80,7 @@ const FontStyles = StyleSheet.create({
         fontFamily: FontFamily.semiBold,
         fontSize: 18
     },
-    h4: {
+    h5: {
         fontFamily: FontFamily.semiBold,
         fontSize: 20
     },

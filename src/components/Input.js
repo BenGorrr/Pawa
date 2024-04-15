@@ -3,7 +3,7 @@ import { Colors, FontStyles } from "../utils/theme";
 import { useState } from "react";
 
 
-const Input = ({ label, placeholder, value, onChangeText, style, secureTextEntry, rightIcon, onIconPress }) => {
+const Input = ({ label, placeholder, value, onChangeText, style, secureTextEntry, rightIcon, onIconPress, ...restProps }) => {
 
     const [isFocused, setIsFocused] = useState(false);
 
@@ -23,6 +23,8 @@ const Input = ({ label, placeholder, value, onChangeText, style, secureTextEntry
                         secureTextEntry={secureTextEntry}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
+                        autoCapitalize="none"
+                        {...restProps}
                     />
                     {
                         rightIcon && (

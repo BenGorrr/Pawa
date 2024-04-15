@@ -54,6 +54,7 @@ export const SignUp4 = ({ navigation, route }) => {
     }
 
     const onNext = () => {
+        setSuccessModal(false);
         navigation.dispatch(
             CommonActions.reset({
                 index: 0,

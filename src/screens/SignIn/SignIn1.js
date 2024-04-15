@@ -18,6 +18,10 @@ export const SignIn1 = ({ navigation, route }) => {
         navigation.navigate("SignUp1");
     }
 
+    const onForgotPassword = () => {
+        navigation.navigate("ForgotPassword");
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={{ marginVertical: 24 }}>
@@ -35,7 +39,7 @@ export const SignIn1 = ({ navigation, route }) => {
                     onIconPress={() => { setShowPassword(!showPassword) }}
                     style={{ marginBottom: 16 }}
                 />
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onForgotPassword}>
                     <Text style={[FontStyles.small_semibold, { color: Colors.primary, alignSelf: "flex-end" }]}>Forgot Password?</Text>
                 </TouchableOpacity>
             </View>
