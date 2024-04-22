@@ -9,6 +9,7 @@ import { SignIn1 } from '../screens/SignIn/SignIn1';
 import { ForgotPassword } from '../screens/ForgotPassword/ForgotPassword';
 import { ForgotPassword_OTP } from '../screens/ForgotPassword/OTP';
 import { ForgotPassword_Create } from '../screens/ForgotPassword/CreatePassword';
+import { MainBottomNavigation } from './MainBottomNavigation';
 
 const MainStack = createStackNavigator();
 
@@ -21,7 +22,7 @@ const ApplicationNavigator = () => {
 }
 
 const MainNavigator = () => {
-    const userToken = null;
+    const userToken = true;
 
     return (
         <MainStack.Navigator
@@ -47,6 +48,7 @@ const MainNavigator = () => {
                     </>
                 ) : (
                     <>
+                        <MainStack.Screen name="MainBottomNavigation" component={MainBottomNavigation} />
                     </>
                 )
             }
