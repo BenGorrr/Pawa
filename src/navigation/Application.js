@@ -1,15 +1,18 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Dashboard } from '../screens/Dashboard/Dashboard';
+import { ForgotPassword_Create } from '../screens/ForgotPassword/CreatePassword';
+import { ForgotPassword } from '../screens/ForgotPassword/ForgotPassword';
+import { ForgotPassword_OTP } from '../screens/ForgotPassword/OTP';
+import { Notifications } from '../screens/Notifications/Notifications';
 import { OnBoardScreen } from '../screens/OnBoarding/OnBoard1';
+import { SignIn1 } from '../screens/SignIn/SignIn1';
 import { SignUp1 } from '../screens/SignUp/SignUp1';
 import { SignUp2 } from '../screens/SignUp/SignUp2';
 import { SignUp3 } from '../screens/SignUp/SignUp3';
 import { SignUp4 } from '../screens/SignUp/SignUp4';
-import { SignIn1 } from '../screens/SignIn/SignIn1';
-import { ForgotPassword } from '../screens/ForgotPassword/ForgotPassword';
-import { ForgotPassword_OTP } from '../screens/ForgotPassword/OTP';
-import { ForgotPassword_Create } from '../screens/ForgotPassword/CreatePassword';
 import { MainBottomNavigation } from './MainBottomNavigation';
+import { Account } from '../screens/Account/Account';
 
 const MainStack = createStackNavigator();
 
@@ -54,6 +57,43 @@ const MainNavigator = () => {
             }
         </MainStack.Navigator>
     )
+}
+
+const HomeStack = createStackNavigator();
+
+export const HomeStackScreen = () => {
+
+    return (
+        <HomeStack.Navigator initialRouteName='Dashboard'
+            screenOptions={{
+                headerShown: false,
+                cardStyle: {
+                    backgroundColor: "#fff"
+                }
+            }}
+        >
+            <HomeStack.Screen name="Dashboard" component={Dashboard} />
+            <HomeStack.Screen name="Notifications" component={Notifications} />
+        </HomeStack.Navigator>
+    );
+}
+
+const AccountStack = createStackNavigator();
+
+export const AccountStackScreen = () => {
+
+    return (
+        <AccountStack.Navigator initialRouteName='Account'
+            screenOptions={{
+                headerShown: false,
+                cardStyle: {
+                    backgroundColor: "#fff"
+                }
+            }}
+        >
+            <AccountStack.Screen name="Account" component={Account} />
+        </AccountStack.Navigator>
+    );
 }
 
 export default ApplicationNavigator;

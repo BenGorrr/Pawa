@@ -3,6 +3,7 @@ import ComingSoon from '../components/ComingSoon';
 import { Dashboard } from '../screens/Dashboard/Dashboard';
 import { Image } from 'react-native';
 import { Colors, FontStyles } from '../utils/theme';
+import { AccountStackScreen, HomeStackScreen } from './Application';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +19,7 @@ export const MainBottomNavigation = () => {
             sceneContainerStyle={{ backgroundColor: "white" }}
         >
             <Tab.Screen
-                name="Home" component={Dashboard}
+                name="HomeStack" component={HomeStackScreen}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ focused }) => (
@@ -50,7 +51,7 @@ export const MainBottomNavigation = () => {
                     ),
                 }}
             />
-            <Tab.Screen name="Account" component={ComingSoon}
+            <Tab.Screen name="AccountStack" component={AccountStackScreen}
                 options={{
                     tabBarLabel: 'Account',
                     tabBarIcon: ({ focused }) => (

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, useWindowDimensions } from "react-native";
 
 const Colors = {
     primary: '#FF407D',
@@ -54,15 +54,15 @@ const FontStyles = StyleSheet.create({
     },
     medium_regular: {
         fontFamily: FontFamily.regular,
-        fontSize: FontSize.regular
+        fontSize: FontSize.medium
     },
     medium_medium: {
         fontFamily: FontFamily.medium,
-        fontSize: FontSize.regular
+        fontSize: FontSize.medium
     },
     medium_semibold: {
         fontFamily: FontFamily.semiBold,
-        fontSize: FontSize.regular
+        fontSize: FontSize.medium
     },
     large_regular: {
         fontFamily: FontFamily.regular,
@@ -109,4 +109,6 @@ const DefaultStyles = StyleSheet.create({
     }
 });
 
-export { Colors, FontStyles, FontFamily, DefaultStyles };
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('screen');
+
+export { Colors, FontStyles, FontFamily, DefaultStyles, SCREEN_WIDTH, SCREEN_HEIGHT };

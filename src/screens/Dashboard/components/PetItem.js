@@ -11,8 +11,7 @@ export const PetItem = ({ item }) => {
             </View>
             <View style={{
                 marginTop: 8,
-                flexDirection: "row",
-
+                flexDirection: "row"
             }}>
                 <Text style={FontStyles.medium_semibold}>{item.name}</Text>
                 <Image source={
@@ -22,10 +21,11 @@ export const PetItem = ({ item }) => {
             </View>
             <View style={{
                 marginTop: 8,
-                flexDirection: "row"
+                flexDirection: "row",
+                alignItems: "center"
             }}>
                 <Image source={require("../../../assets/icons/dashboard/map-pin.png")} />
-                <Text style={FontStyles.XSmall_regular}>{item.distance} - {item.area}</Text>
+                <Text style={[FontStyles.XSmall_regular, { color: Colors.text_grey, marginStart: 4 }]}>{item.distance} - {item.area}</Text>
             </View>
         </Pressable>
     );
@@ -33,7 +33,7 @@ export const PetItem = ({ item }) => {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: "center"
+        alignItems: "flex-start"
     },
     imageStyle: {
         marginBottom: 8
