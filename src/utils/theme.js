@@ -10,7 +10,7 @@ const Colors = {
     text_grey: '#666D80', // 500
     icon_grey: '#A4ACB9', // 300
     border_grey: '#DFE1E7', // 100
-
+    light_grey: "#F8F8F8"
 };
 
 const FontFamily = {

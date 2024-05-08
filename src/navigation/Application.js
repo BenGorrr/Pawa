@@ -13,6 +13,8 @@ import { SignUp3 } from '../screens/SignUp/SignUp3';
 import { SignUp4 } from '../screens/SignUp/SignUp4';
 import { MainBottomNavigation } from './MainBottomNavigation';
 import { Account } from '../screens/Account/Account';
+import { Profile } from '../screens/Profile/Profile';
+import { PetDetails } from '../screens/Adoption/PetDetails';
 
 const MainStack = createStackNavigator();
 
@@ -52,6 +54,8 @@ const MainNavigator = () => {
                 ) : (
                     <>
                         <MainStack.Screen name="MainBottomNavigation" component={MainBottomNavigation} />
+                        <MainStack.Screen name="AdoptionStackScreen" component={AdoptionStackScreen} />
+                        <MainStack.Screen name="Notifications" component={Notifications} />
                     </>
                 )
             }
@@ -73,8 +77,25 @@ export const HomeStackScreen = () => {
             }}
         >
             <HomeStack.Screen name="Dashboard" component={Dashboard} />
-            <HomeStack.Screen name="Notifications" component={Notifications} />
         </HomeStack.Navigator>
+    );
+}
+
+const AdoptionStack = createStackNavigator();
+
+export const AdoptionStackScreen = () => {
+
+    return (
+        <AdoptionStack.Navigator initialRouteName='PetDetails'
+            screenOptions={{
+                headerShown: false,
+                cardStyle: {
+                    backgroundColor: "#fff"
+                }
+            }}
+        >
+            <AdoptionStack.Screen name="PetDetails" component={PetDetails} />
+        </AdoptionStack.Navigator>
     );
 }
 
@@ -92,6 +113,7 @@ export const AccountStackScreen = () => {
             }}
         >
             <AccountStack.Screen name="Account" component={Account} />
+            <AccountStack.Screen name="Profile" component={Profile} />
         </AccountStack.Navigator>
     );
 }

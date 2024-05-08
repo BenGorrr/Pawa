@@ -2,14 +2,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Colors, FontStyles } from "../utils/theme";
 
 
-const Button = ({ title, onPress, style }) => {
+const Button = ({ title, onPress, style, textStyle }) => {
 
     return (
         <TouchableOpacity
             onPress={onPress}
             style={[styles.container, style]}
         >
-            <Text style={[FontStyles.medium_semibold, styles.title]}>{title}</Text>
+            <Text style={[FontStyles.medium_semibold, styles.title, textStyle]}>{title}</Text>
         </TouchableOpacity>
     )
 };

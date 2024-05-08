@@ -1,10 +1,11 @@
 import React from 'react';
 import { FlatList, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import 'react-native-gesture-handler';
-import { CATEGORIES_DATA, PETS_DATA } from '../../DATA/Dashboard/dummy_data';
+import { CATEGORIES_DATA } from '../../DATA/Dashboard/dummy_data';
 import { Colors, FontStyles, SCREEN_WIDTH } from '../../utils/theme';
 import { CategoryButton } from './components/CategoryButton';
 import { PetItem } from './components/PetItem';
+import { PETS_DATA } from '../../DATA/Pets/dummy_data';
 
 export const Dashboard = ({ navigation, route }) => {
 
@@ -49,7 +50,11 @@ export const Dashboard = ({ navigation, route }) => {
 
                 <FlatList
                     data={PETS_DATA}
-                    renderItem={({ item, index }) => <PetItem item={item} />}
+                    renderItem={({ item, index }) =>
+                        <Pressable onPress={() => navigation.navigate("AdoptionStackScreen", { screen: "PetDetails", params: { pet: item } })}>
+                            <PetItem item={item} />
+                        </Pressable>
+                    }
                     keyExtractor={item => item.name}
                     horizontal={true}
                     contentContainerStyle={{
@@ -73,7 +78,11 @@ export const Dashboard = ({ navigation, route }) => {
 
                 <FlatList
                     data={PETS_DATA}
-                    renderItem={({ item, index }) => <PetItem item={item} />}
+                    renderItem={({ item, index }) =>
+                        <Pressable onPress={() => navigation.navigate("AdoptionStackScreen", { screen: "PetDetails", params: { pet: item } })}>
+                            <PetItem item={item} />
+                        </Pressable>
+                    }
                     keyExtractor={item => item.name}
                     horizontal={true}
                     contentContainerStyle={{

@@ -5,7 +5,7 @@ import { Colors, FontStyles } from "../../../utils/theme";
 export const PetItem = ({ item }) => {
 
     return (
-        <Pressable style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.imageStyle}>
                 <Image source={item.image} />
             </View>
@@ -27,7 +27,7 @@ export const PetItem = ({ item }) => {
                 <Image source={require("../../../assets/icons/dashboard/map-pin.png")} />
                 <Text style={[FontStyles.XSmall_regular, { color: Colors.text_grey, marginStart: 4 }]}>{item.distance} - {item.area}</Text>
             </View>
-        </Pressable>
+        </View>
     );
 };
 

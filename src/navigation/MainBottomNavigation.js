@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ComingSoon from '../components/ComingSoon';
-import { Dashboard } from '../screens/Dashboard/Dashboard';
 import { Image } from 'react-native';
+import ComingSoon from '../components/ComingSoon';
 import { Colors, FontStyles } from '../utils/theme';
 import { AccountStackScreen, HomeStackScreen } from './Application';
 

@@ -28,7 +28,7 @@ const AppBar = ({ back, title, menu }) => {
                 )
             }
             {
-                back && (
+                menu && (
                     <View style={{ flex: 1, alignItems: "flex-end" }}>
                         <TouchableOpacity onPress={navigation.goBack}>
                             <Image source={require("../assets/icons/dots-vertical.png")} />
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
         width: "100%",
         flexDirection: "row",
         paddingHorizontal: "6%",
+        paddingVertical: 12,
         alignItems: "center",
         justifyContent: "center"
     }

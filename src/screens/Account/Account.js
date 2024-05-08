@@ -1,62 +1,148 @@
-import React from 'react';
-import { Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Colors, FontStyles } from '../../utils/theme';
+import React, { useState } from 'react';
+import { FlatList, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { PROFILE_DATA } from '../../DATA/Account/dummy_data';
+import BottomModal from '../../components/BottomModal';
 import Button from '../../components/Button';
+import { Colors, FontStyles } from '../../utils/theme';
+import TextItem from '../SignUp/components/TextItem';
 import { SettingItem } from './components/SettingItem';
 
-const PERSONAL_MENU = [
+const categories = [
     {
-        icon: require("../../assets/icons/account/user.png"),
-        label: "Profile",
-        nav: ""
+        text: "Dogs",
+        image: require("../../assets/icons/category/dogs.png")
     },
     {
-        icon: require("../../assets/icons/account/dog.png"),
-        label: "Pet Preferences",
-        nav: ""
-    },
-]
-
-const SECURITY_MENU = [
-    {
-        icon: require("../../assets/icons/account/shield.png"),
-        label: "Account & Security",
-        nav: ""
+        text: "Cats",
+        image: require("../../assets/icons/category/cats.png")
     },
     {
-        icon: require("../../assets/icons/account/arrows-up-down.png"),
-        label: "Account Linked",
-        nav: ""
-    },
-]
-
-const GENERAL_MENU = [
-    {
-        icon: require("../../assets/icons/account/bell.png"),
-        label: "Notifications",
-        nav: ""
+        text: "Birds",
+        image: require("../../assets/icons/category/birds.png")
     },
     {
-        icon: require("../../assets/icons/account/eye.png"),
-        label: "Appearance",
-        nav: ""
+        text: "Rabbits",
+        image: require("../../assets/icons/category/rabbits.png")
     },
     {
-        icon: require("../../assets/icons/account/stairs-up.png"),
-        label: "Data & Analytics",
-        nav: ""
+        text: "Primates",
+        image: require("../../assets/icons/category/primates.png")
     },
     {
-        icon: require("../../assets/icons/account/users.png"),
-        label: "Invite Friends",
-        nav: ""
+        text: "Reptiles",
+        image: require("../../assets/icons/category/reptiles.png")
+    },
+    {
+        text: "Fish",
+        image: require("../../assets/icons/category/fish.png")
+    },
+    {
+        text: "Heroes",
+        image: require("../../assets/icons/category/heroes.png")
+    },
+    {
+        text: "Other",
+        image: require("../../assets/icons/category/other.png")
     }
 ]
 
+const PetPreferencesModal = ({ visible, setVisible }) => {
+    const [selectedList, setSelectedList] = useState([]);
+
+    const isSelected = (item) => {
+        return selectedList.some(obj => obj.text === item.text);
+    }
+
+    const onItemPress = (item) => {
+        const existingIndex = selectedList.findIndex(obj => obj.text === item.text);
+        if (existingIndex !== -1) {
+            const updatedList = [...selectedList];
+            updatedList.splice(existingIndex, 1);
+            setSelectedList(updatedList); // Remove the item if it exists in the list
+        } else {
+            setSelectedList([...selectedList, item]); // Add the item to the list if it doesn't exist
+        }
+    }
+
+    return (
+        <BottomModal
+            title={"Pet Preferences"}
+            visible={visible}
+            onCancel={() => setVisible(false)}
+            onConfirm={() => setVisible(false)}
+        >
+            <View>
+                <FlatList
+                    data={categories}
+                    numColumns={4}
+                    keyExtractor={(item) => item.text}
+                    renderItem={({ index, item }) => (
+                        <TextItem title={item.text} selected={isSelected(item)} onPress={() => onItemPress(item)} />
+                    )}
+                    scrollEnabled={false}
+                />
+            </View>
+        </BottomModal>
+    )
+}
 
 export const Account = ({ navigation, route }) => {
     const profile = PROFILE_DATA;
+
+    const [petPreferencesVisible, setPetPreferencesVisible] = useState(false);
+
+    const PERSONAL_MENU = [
+        {
+            icon: require("../../assets/icons/account/user.png"),
+            label: "Profile",
+            action: () => {
+                navigation.navigate("Profile")
+            }
+        },
+        {
+            icon: require("../../assets/icons/account/dog.png"),
+            label: "Pet Preferences",
+            action: () => {
+                setPetPreferencesVisible(true);
+            }
+        },
+    ]
+
+    const SECURITY_MENU = [
+        {
+            icon: require("../../assets/icons/account/shield.png"),
+            label: "Account & Security",
+            action: ""
+        },
+        {
+            icon: require("../../assets/icons/account/arrows-up-down.png"),
+            label: "Account Linked",
+            action: ""
+        },
+    ]
+
+    const GENERAL_MENU = [
+        {
+            icon: require("../../assets/icons/account/bell.png"),
+            label: "Notifications",
+            action: ""
+        },
+        {
+            icon: require("../../assets/icons/account/eye.png"),
+            label: "Appearance",
+            action: ""
+        },
+        {
+            icon: require("../../assets/icons/account/stairs-up.png"),
+            label: "Data & Analytics",
+            action: ""
+        },
+        {
+            icon: require("../../assets/icons/account/users.png"),
+            label: "Invite Friends",
+            action: ""
+        }
+    ]
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -90,7 +176,7 @@ export const Account = ({ navigation, route }) => {
                     </View>
                     {
                         PERSONAL_MENU.map(item =>
-                            <SettingItem item={item} />
+                            <SettingItem key={item.label} item={item} onPress={item.action} />
                         )
                     }
                 </View>
@@ -101,7 +187,7 @@ export const Account = ({ navigation, route }) => {
                     </View>
                     {
                         SECURITY_MENU.map(item =>
-                            <SettingItem item={item} />
+                            <SettingItem key={item.label} item={item} />
                         )
                     }
                 </View>
@@ -112,11 +198,12 @@ export const Account = ({ navigation, route }) => {
                     </View>
                     {
                         GENERAL_MENU.map(item =>
-                            <SettingItem item={item} />
+                            <SettingItem key={item.label} item={item} />
                         )
                     }
                 </View>
             </ScrollView>
+            <PetPreferencesModal visible={petPreferencesVisible} setVisible={setPetPreferencesVisible} />
         </SafeAreaView>
     );
 }

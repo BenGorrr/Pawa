@@ -2,11 +2,11 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { FontStyles } from "../../../utils/theme";
 
 
-export const SettingItem = ({ item }) => {
+export const SettingItem = ({ item, onPress }) => {
     const { icon, label } = item;
 
     return (
-        <Pressable style={styles.container}>
+        <Pressable style={styles.container} onPress={onPress}>
             <Image source={icon} />
             <View style={{
                 flex: 1,
