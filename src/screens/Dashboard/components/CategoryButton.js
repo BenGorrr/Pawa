@@ -2,10 +2,10 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors, FontStyles } from "../../../utils/theme";
 
 
-export const CategoryButton = ({ image, label }) => {
+export const CategoryButton = ({ image, label, onPress }) => {
 
     return (
-        <Pressable style={styles.container}>
+        <Pressable style={styles.container} onPress={onPress}>
             <View style={styles.imageStyle}>
                 <Image source={image} />
             </View>

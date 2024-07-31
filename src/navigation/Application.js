@@ -15,6 +15,9 @@ import { MainBottomNavigation } from './MainBottomNavigation';
 import { Account } from '../screens/Account/Account';
 import { Profile } from '../screens/Profile/Profile';
 import { PetDetails } from '../screens/Adoption/PetDetails';
+import { PetList } from '../screens/Adoption/PetList';
+import { Adopt_Info } from '../screens/Adoption/Adopt_Info';
+import { Adopt_Shipping } from '../screens/Adoption/Adopt_Shipping';
 
 const MainStack = createStackNavigator();
 
@@ -86,7 +89,7 @@ const AdoptionStack = createStackNavigator();
 export const AdoptionStackScreen = () => {
 
     return (
-        <AdoptionStack.Navigator initialRouteName='PetDetails'
+        <AdoptionStack.Navigator
             screenOptions={{
                 headerShown: false,
                 cardStyle: {
@@ -94,7 +97,10 @@ export const AdoptionStackScreen = () => {
                 }
             }}
         >
+            <AdoptionStack.Screen name="PetList" component={PetList} />
             <AdoptionStack.Screen name="PetDetails" component={PetDetails} />
+            <AdoptionStack.Screen name="Adopt_Info" component={Adopt_Info} />
+            <AdoptionStack.Screen name="Adopt_Shipping" component={Adopt_Shipping} />
         </AdoptionStack.Navigator>
     );
 }

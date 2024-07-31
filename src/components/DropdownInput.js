@@ -1,9 +1,11 @@
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Colors, FontStyles } from "../utils/theme";
 import { useState } from "react";
+import { Dropdown } from "react-native-element-dropdown";
 
 
-const Input = ({ label, height, placeholder, value, onChangeText, style, secureTextEntry, rightIcon, onIconPress, ...restProps }) => {
+
+const DropdownInput = ({ data, label, placeholder, value, onChange, style, secureTextEntry, rightIcon, onIconPress, ...restProps }) => {
 
     const [isFocused, setIsFocused] = useState(false);
 
@@ -14,25 +16,22 @@ const Input = ({ label, height, placeholder, value, onChangeText, style, secureT
             <Text style={[FontStyles.small_medium, styles.label]}>{label}</Text>
             <View style={[styles.outerContainer, isFocused && styles.outerContainerFocused]}>
                 <View style={[styles.inputContainer, isFocused && styles.inputContainerFocused]}>
-                    <TextInput
-                        onChangeText={onChangeText}
+                    <Dropdown
+                        style={styles.dropdown}
+                        placeholderStyle={styles.placeholderStyle}
+                        selectedTextStyle={styles.selectedTextStyle}
+                        data={data}
+                        labelField="label"
+                        valueField="value"
+                        placeholder={placeholder || "Select item"}
+                        searchPlaceholder="Search..."
                         value={value}
-                        placeholder={placeholder}
-                        placeholderTextColor={Colors.icon_grey}
-                        style={[styles.input, height && { height: height, marginVertical: 12 }, isFocused && styles.inputFocused]}
-                        secureTextEntry={secureTextEntry}
+                        onChange={item => {
+                            onChange(item.value)
+                        }}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
-                        autoCapitalize="none"
-                        {...restProps}
                     />
-                    {
-                        rightIcon && (
-                            <TouchableOpacity onPress={onIconPress}>
-                                <Image source={rightIcon} />
-                            </TouchableOpacity>
-                        )
-                    }
                 </View>
 
             </View>
@@ -58,8 +57,8 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderColor: Colors.border_grey,
         paddingHorizontal: 16,
-        flexDirection: "row",
-        alignItems: "center"
+        // flexDirection: "row",
+        // alignItems: "center"
     },
     inputContainerFocused: {
         borderColor: Colors.primary
@@ -74,8 +73,30 @@ const styles = StyleSheet.create({
     },
     outerContainerFocused: {
         borderColor: Colors.secondary
+    },
+
+
+    dropdown: {
+        // margin: 16,
+        height: 48,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0,
+    },
+    icon: {
+        marginRight: 5,
+    },
+    placeholderStyle: {
+        ...FontStyles.small_medium,
+        color: Colors.icon_grey
+    },
+    selectedTextStyle: {
+        ...FontStyles.small_medium,
+    },
+    iconStyle: {
+        width: 20,
+        height: 20,
     }
 });
 
 
-export default Input;
+export default DropdownInput;

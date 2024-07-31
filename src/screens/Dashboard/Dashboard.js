@@ -37,14 +37,18 @@ export const Dashboard = ({ navigation, route }) => {
 
                 <View style={{ marginTop: 24, flexDirection: "row", justifyContent: "space-between" }}>
                     {
-                        CATEGORIES_DATA.map(category => <CategoryButton image={category.image} label={category.label} />)
+                        CATEGORIES_DATA.map(category => <CategoryButton key={category.label} image={category.image} label={category.label} onPress={() => {
+                            navigation.navigate("AdoptionStackScreen", { screen: "PetList", params: { category: category.label } })
+                        }} />)
                     }
                 </View>
 
                 <View style={{ marginTop: 24, marginBottom: 16 }}>
                     <View style={styles.sectionHeader}>
                         <Text style={FontStyles.h6}>Pets near you</Text>
-                        <Pressable><Text style={[FontStyles.small_semibold, { color: Colors.primary }]}>View all</Text></Pressable>
+                        <Pressable onPress={() => navigation.navigate("AdoptionStackScreen", { screen: "PetList", params: { category: "Pets near you" } })}>
+                            <Text style={[FontStyles.small_semibold, { color: Colors.primary }]}>View all</Text>
+                        </Pressable>
                     </View>
                 </View>
 
@@ -52,7 +56,7 @@ export const Dashboard = ({ navigation, route }) => {
                     data={PETS_DATA}
                     renderItem={({ item, index }) =>
                         <Pressable onPress={() => navigation.navigate("AdoptionStackScreen", { screen: "PetDetails", params: { pet: item } })}>
-                            <PetItem item={item} />
+                            <PetItem item={item} style={{ width: SCREEN_WIDTH * 0.35 }} />
                         </Pressable>
                     }
                     keyExtractor={item => item.name}
@@ -72,7 +76,9 @@ export const Dashboard = ({ navigation, route }) => {
                 <View style={{ marginTop: 32, marginBottom: 16 }}>
                     <View style={styles.sectionHeader}>
                         <Text style={FontStyles.h6}>Based on your preferences</Text>
-                        <Pressable><Text style={[FontStyles.small_semibold, { color: Colors.primary }]}>View all</Text></Pressable>
+                        <Pressable onPress={() => navigation.navigate("AdoptionStackScreen", { screen: "PetList", params: { category: "Based on your preferences" } })}>
+                            <Text style={[FontStyles.small_semibold, { color: Colors.primary }]}>View all</Text>
+                        </Pressable>
                     </View>
                 </View>
 
@@ -80,7 +86,7 @@ export const Dashboard = ({ navigation, route }) => {
                     data={PETS_DATA}
                     renderItem={({ item, index }) =>
                         <Pressable onPress={() => navigation.navigate("AdoptionStackScreen", { screen: "PetDetails", params: { pet: item } })}>
-                            <PetItem item={item} />
+                            <PetItem item={item} style={{ width: SCREEN_WIDTH * 0.35 }} />
                         </Pressable>
                     }
                     keyExtractor={item => item.name}

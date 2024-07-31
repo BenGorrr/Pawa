@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontStyles } from "../utils/theme";
 
 
-const AppBar = ({ back, title, menu }) => {
+const AppBar = ({ back, title, menu, search }) => {
     const navigation = useNavigation();
 
     return (
@@ -27,15 +27,27 @@ const AppBar = ({ back, title, menu }) => {
                     }]}>{title}</Text>
                 )
             }
-            {
-                menu && (
-                    <View style={{ flex: 1, alignItems: "flex-end" }}>
-                        <TouchableOpacity onPress={navigation.goBack}>
-                            <Image source={require("../assets/icons/dots-vertical.png")} />
-                        </TouchableOpacity>
-                    </View>
-                )
-            }
+            <View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end" }}>
+
+                {
+                    search && (
+                        <View style={{ paddingEnd: 12 }}>
+                            <TouchableOpacity onPress={navigation.goBack}>
+                                <Image source={require("../assets/icons/search.png")} />
+                            </TouchableOpacity>
+                        </View>
+                    )
+                }
+                {
+                    menu && (
+                        <View style={{}}>
+                            <TouchableOpacity onPress={navigation.goBack}>
+                                <Image source={require("../assets/icons/dots-vertical.png")} />
+                            </TouchableOpacity>
+                        </View>
+                    )
+                }
+            </View>
         </View>
     )
 };

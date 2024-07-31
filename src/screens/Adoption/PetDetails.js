@@ -9,7 +9,7 @@ export const PetDetails = ({ navigation, route }) => {
     const pet = route.params.pet;
 
     const onAdopt = () => {
-
+        navigation.navigate("Adopt_Info", { pet: pet })
     }
 
     return (

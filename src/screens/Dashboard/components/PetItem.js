@@ -1,13 +1,13 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { Colors, FontStyles } from "../../../utils/theme";
 
 
-export const PetItem = ({ item }) => {
+export const PetItem = ({ item, style }) => {
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             <View style={styles.imageStyle}>
-                <Image source={item.image} />
+                <Image source={item.image} style={{ width: "100%", height: undefined, aspectRatio: 1 }} />
             </View>
             <View style={{
                 marginTop: 8,
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
         alignItems: "flex-start"
     },
     imageStyle: {
-        marginBottom: 8
+        marginBottom: 8,
+        width: "100%"
     }
 })

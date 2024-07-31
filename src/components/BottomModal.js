@@ -3,8 +3,7 @@ import { Colors, FontStyles } from "../utils/theme";
 import Button from "./Button";
 
 
-const BottomModal = ({ visible, title, onConfirm, onCancel, children }) => {
-    console.log("child ", children)
+export const BottomModal = ({ visible, title, onConfirm, onCancel, children }) => {
     return (
         <RNModal
             animationType="slide"
@@ -21,14 +20,17 @@ const BottomModal = ({ visible, title, onConfirm, onCancel, children }) => {
                         {children}
                     </View>
                     <View style={[styles.buttonContainer]}>
-                        <View style={[styles.button, { marginEnd: 6 }]}>
-                            <Button
-                                title={"Cancel"}
-                                onPress={onCancel}
-                                style={{ marginTop: 24, backgroundColor: "white", borderColor: Colors.primary, borderWidth: 1 }}
-                                textStyle={{ color: Colors.primary }}
-                            />
-                        </View>
+                        {
+                            onCancel &&
+                            <View style={[styles.button, { marginEnd: 6 }]}>
+                                <Button
+                                    title={"Cancel"}
+                                    onPress={onCancel}
+                                    style={{ marginTop: 24, backgroundColor: "white", borderColor: Colors.primary, borderWidth: 1 }}
+                                    textStyle={{ color: Colors.primary }}
+                                />
+                            </View>
+                        }
                         <View style={[styles.button, { marginStart: 6 }]}>
                             <Button title={"Confirm"} onPress={onConfirm} style={{ marginTop: 24 }} />
                         </View>
@@ -60,5 +62,3 @@ const styles = StyleSheet.create({
     }
 });
 
-
-export default BottomModal;
